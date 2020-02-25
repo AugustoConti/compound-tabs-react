@@ -4,28 +4,59 @@
   "private": true,
   "dependencies": {
     "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-scripts": "3.1.1"
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-config-react-app": "^5.2.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-react-hooks": "^2.4.0",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^1.19.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "watch": "parcel src/index.html --open"
   },
   "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+    "extends": [
+      "eslint:recommended",
+      "prettier",
+      "react-app",
+      "plugin:jsx-a11y/recommended",
+      "plugin:prettier/recommended"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "plugins": [
+      "prettier",
+      "jsx-a11y",
+      "react-hooks"
+    ],
+    "rules": {
+      "no-nested-ternary": "off",
+      "prettier/prettier": "error",
+      "react/jsx-curly-newline": "off",
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js"
+          ]
+        }
+      ],
+      "react/jsx-props-no-spreading": "off",
+      "react/jsx-wrap-multilines": "off",
+      "react/require-default-props": "off",
+      "react/state-in-constructor": "off",
+      "react-hooks/exhaustive-deps": "warn",
+      "react-hooks/rules-of-hooks": "error"
+    }
+  },
+  "prettier": {
+    "printWidth": 90,
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "tabWidth": 2
   }
 }

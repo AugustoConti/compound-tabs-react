@@ -5,6 +5,8 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+dist
+
 ### Linux ###
 *~
 
