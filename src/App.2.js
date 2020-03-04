@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import * as styles from './styles';
 
 const TabList = ({ children }) => {
