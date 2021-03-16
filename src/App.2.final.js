@@ -1,13 +1,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Children, cloneElement, useState } from 'react';
-
 import * as styles from './styles';
 
 const Tabs = ({ children }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const newChildren = Children.map(children, child => {
+  const newChildren = Children.map(children, (child) => {
     if (child.type === TabPanels) {
       return cloneElement(child, { activeIndex });
     } else if (child.type === TabList) {

@@ -19,7 +19,7 @@ const activeTab = { ...tabDefault };
 
 const disabledTab = {
   ...tabDefault,
-  cursor: '',
+  cursor: 'not-allowed',
   color: 'lightGray',
   borderColor: 'lightGray',
 };
