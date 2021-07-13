@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import * as styles from './styles';
 
-const Tabs = ({ data, disabled, tabsOnBottom }) => {
+function Tabs({ data, disabled, tabsOnBottom }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const renderTabs = () =>
@@ -32,21 +32,21 @@ const Tabs = ({ data, disabled, tabsOnBottom }) => {
   const panel = <div style={styles.tabPanels}>{renderPanel()}</div>;
 
   return <div>{tabsOnBottom ? [panel, tabs] : [tabs, panel]}</div>;
-};
+}
 
-const App = () => {
+function App() {
   const tabData = [
     {
-      label: 'Panchito',
-      description: <p>Los panchitos son riquísimos</p>,
+      label: 'Tacos',
+      description: 'Tacos are delicious.',
     },
     {
-      label: 'Burger',
-      description: <p>A veces una buena hamburguesa es todo lo que necesitas</p>,
+      label: 'Burritos',
+      description: 'Sometimes a burrito is what you really need.',
     },
     {
-      label: 'Milanga',
-      description: <p>Quizás la mejor opción</p>,
+      label: 'Coconut Korma',
+      description: 'Might be your best option.',
     },
   ];
 
@@ -55,6 +55,6 @@ const App = () => {
       <Tabs disabled={[1]} tabsOnBottom={false} data={tabData} />
     </div>
   );
-};
+}
 
 export default App;

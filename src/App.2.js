@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import * as styles from './styles';
 
-const TabList = ({ children }) => {
-  return <div style={styles.tabs}>{children}</div>;
-};
-
-const Tab = ({ children }) => {
+function Tab({ children }) {
   const isDisabled = false;
   const isActive = false;
 
@@ -16,41 +12,52 @@ const Tab = ({ children }) => {
     : styles.tab;
 
   return <div style={style}>{children}</div>;
-};
+}
 
-const TabPanels = ({ children }) => <div style={styles.tabPanels}>{children}</div>;
+function TabList({ children }) {
+  const tabs = children;
+  return <div style={styles.tabs}>{tabs}</div>;
+}
 
-const TabPanel = ({ children }) => <div>{children}</div>;
+function TabPanel({ children }) {
+  return <div>{children}</div>;
+}
 
-const Tabs = ({ children }) => {
+function TabPanels({ children }) {
+  return <div style={styles.tabPanels}>{children}</div>;
+}
+
+function Tabs(props) {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  return <div>{children}</div>;
-};
+  const children = props.children;
 
-const App = () => {
+  return <div>{children}</div>;
+}
+
+function App() {
   return (
     <div>
       <Tabs>
         <TabList>
-          <Tab>Panchito</Tab>
-          <Tab isDisabled>Burger</Tab>
-          <Tab>Milanga</Tab>
+          <Tab>Tacos</Tab>
+          <Tab isDisabled>Burritos</Tab>
+          <Tab>Coconut Korma</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
-            <p>Los panchitos son riquísimos</p>
+            <p>Tacos are delicious.</p>
           </TabPanel>
           <TabPanel>
-            <p>A veces una buena hamburguesa es todo lo que necesitas</p>
+            <p>Sometimes a burrito is what you really need.</p>
           </TabPanel>
           <TabPanel>
-            <p>Quizás la mejor opción</p>
+            <p>Might be your best option.</p>
           </TabPanel>
         </TabPanels>
       </Tabs>
     </div>
   );
-};
+}
 
 export default App;

@@ -1,33 +1,29 @@
 const tabs = {
-  margin: '25px',
+  display: 'flex',
+  margin: '0.5rem',
 };
-
-const fontSize20 = { fontSize: '20px' };
 
 const tabDefault = {
-  ...fontSize20,
+  fontSize: '1.5rem',
   cursor: 'pointer',
-  display: 'inline',
-  margin: '10px',
-  padding: '10px',
-  borderBottom: '5px solid',
+  margin: '0.5rem',
+  padding: '0.5rem',
 };
 
-const tab = { ...tabDefault, borderColor: 'gray' };
+const tab = { ...tabDefault, borderBottom: '0.350rem solid gray' };
 
-const activeTab = { ...tabDefault };
+const activeTab = { ...tabDefault, borderBottom: '0.350rem solid black' };
 
 const disabledTab = {
   ...tabDefault,
   cursor: 'not-allowed',
   color: 'lightGray',
-  borderColor: 'lightGray',
+  borderBottom: '0.350rem solid lightGray',
 };
 
 const tabPanels = {
-  ...fontSize20,
-  marginTop: '50px',
-  marginLeft: '35px',
+  fontSize: '1.5rem',
+  margin: '1rem',
 };
 
 export { tabs, tabPanels, tab, activeTab, disabledTab };

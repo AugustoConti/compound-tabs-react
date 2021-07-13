@@ -3,33 +3,7 @@
 import React, { Children, cloneElement, useState } from 'react';
 import * as styles from './styles';
 
-const Tabs = ({ children }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const newChildren = Children.map(children, (child) => {
-    if (child.type === TabPanels) {
-      return cloneElement(child, { activeIndex });
-    } else if (child.type === TabList) {
-      return cloneElement(child, { activeIndex, onActiveTab: setActiveIndex });
-    } else {
-      return child;
-    }
-  });
-
-  return <div>{newChildren}</div>;
-};
-
-const TabList = ({ activeIndex, onActiveTab, children }) => {
-  const newChildren = Children.map(children, (child, index) =>
-    cloneElement(child, {
-      isActive: index === activeIndex,
-      onActivate: () => onActiveTab(index),
-    })
-  );
-  return <div style={styles.tabs}>{newChildren}</div>;
-};
-
-const Tab = ({ isDisabled, isActive, onActivate, children }) => {
+function Tab({ isDisabled, isActive, onActivate, children }) {
   const style = isDisabled
     ? styles.disabledTab
     : isActive
@@ -40,54 +14,83 @@ const Tab = ({ isDisabled, isActive, onActivate, children }) => {
       {children}
     </div>
   );
-};
+}
 
-const TabPanels = ({ activeIndex, children }) => (
-  <div style={styles.tabPanels}>{children[activeIndex]}</div>
-);
+function TabList({ activeIndex, onActiveTab, children }) {
+  const tabs = Children.map(children, (child, index) =>
+    cloneElement(child, {
+      isActive: index === activeIndex,
+      onActivate: () => onActiveTab(index),
+    })
+  );
+  return <div style={styles.tabs}>{tabs}</div>;
+}
 
-const TabPanel = ({ children }) => <div>{children}</div>;
+function TabPanel({ children }) {
+  return <div>{children}</div>;
+}
 
-const DataTabs = ({ data }) => {
+function TabPanels({ activeIndex, children }) {
+  return <div style={styles.tabPanels}>{children[activeIndex]}</div>;
+}
+
+function Tabs(props) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const children = Children.map(props.children, (child) => {
+    if (child.type === TabPanels) {
+      return cloneElement(child, { activeIndex });
+    } else if (child.type === TabList) {
+      return cloneElement(child, { activeIndex, onActiveTab: setActiveIndex });
+    } else {
+      return child;
+    }
+  });
+
+  return <div>{children}</div>;
+}
+
+function DataTabs({ data }) {
   return (
     <Tabs>
       <TabList>
-        {data.map(({ label, isDisabled }) => (
-          <Tab isDisabled={isDisabled}>{label}</Tab>
+        {data.map((tab) => (
+          <Tab isDisabled={tab.isDisabled}>{tab.label}</Tab>
         ))}
       </TabList>
       <TabPanels>
-        {data.map(({ description }) => (
-          <TabPanel>{description}</TabPanel>
+        {data.map((tab) => (
+          <TabPanel>{tab.description}</TabPanel>
         ))}
       </TabPanels>
     </Tabs>
   );
-};
+}
 
-const App = () => {
+function App() {
   const data = [
     {
-      label: 'Panchito',
-      description: <p>Los panchitos son riquísimos</p>,
+      label: 'Tacos',
+      description: 'Tacos are delicious.',
       isDisabled: false,
     },
     {
-      label: 'Burger',
-      description: <p>A veces una buena hamburguesa es todo lo que necesitas</p>,
+      label: 'Burritos',
+      description: 'Sometimes a burrito is what you really need.',
       isDisabled: true,
     },
     {
-      label: 'Milanga',
-      description: <p>Quizás la mejor opción</p>,
+      label: 'Coconut Korma',
+      description: 'Might be your best option.',
       isDisabled: false,
     },
   ];
+
   return (
     <div>
       <DataTabs data={data} />
     </div>
   );
-};
+}
 
 export default App;
